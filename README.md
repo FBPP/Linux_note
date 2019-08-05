@@ -255,7 +255,7 @@
 		+ key=value：value：value 
 + 查看任务管理器：top
 	+ top不能对进程进行管理 
-### 第四章：网络管理
+# 第四章：网络管理
 + 查看网络配置信息 ifconfig
 	+ 第一个eth0或者enp0s3 表示网卡
 	+ 第二个lo表示回环
@@ -263,7 +263,32 @@
 	+ 可以指定包的数量 例如发四个包 ping 192.168.40.2 -c 4
 	+ ping 域名
 + nslookup 访问DNS服务器查找域名对应的ip地址
-### 第五章：用户管理
+# 第五章：用户管理
++ 可以去 /etc/passwd 里面查看用户
+### 1、 adduser 创建用户
 + 创建用户：adduser+用户名
-	+ 实质上是个脚本
-	+ sudo adduser xiaoming 
++ 实质上是个脚本
++ sudo adduser xiaoming 
++ 登录用户： su + 用户名
++ 不能创建含有大写字母的用户名
++ 会要求输入密码
+### 2、useradd 创建用户
++ 参数 
+	+ -s 使用什么命令解析器 -s /bin/bash
+	+ -g 用户所属的组 -g xxx组
+	+ -d 用户的目录 -d /home/XiaoMing
+	+ -m 创建home/的用户名目录 -m XiaoMing
++ 不同于adduser，useradd是命令
++ 可以创建大写字母的用户名 
++ 不会要求输入密码
+### 3、groupadd 创建用户组
++ groupadd XXX组
+### 4、passwd 修改密码
++ passwd xiaoming
++ passwd 修改当前用户密码
++ sudo passwd 修改root密码
+### 5、deluser 删除用户
++ deluser xiaoming
+### 6、userdel -r 删除用户
++ userdel -r xiaoming 
++ 会删除对应的目录
