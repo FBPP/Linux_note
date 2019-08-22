@@ -569,10 +569,24 @@
 	+ >0 读取的字节数 
 + write() 写文件
 + lseek() 文件指针的移动 
+	+ off_t lseek(int handle, off_t offset, int fromwhere)
+		+  handle 文件描述符
+		+  offset 相对于fromwhere的偏移量，整数向前，负数向后，0就是fromwhere的位置
+		+  fromwhere 一般用下面三个
+			+ SEEK_SET 将读写位置指向文件头后再增加offset个位移量。
+			+ SEEK_CUR 以目前的读写位置往后增加offset个位移量。
+			+ SEEK_END 将读写位置指向文件尾后再增加offset个位移量
+	+ 返回值返回区里文件头多少个字节 
 	+ 获取文件大小
-	+ 获得文件指针
+		+ lseek(fd, 0, SEEK_END)
+	+ 获得文件指针当前位置
+		+ lseek(fd, 0, SEEK_CUR)
 	+ 文件拓展
-		+ 空洞文件
+		+ 只等向后拓展
+		+ lseek(fd, 2000, SEEK_END) //拓展2000字节
+		+ 必须进行一次写操作才能完成拓展
+		+ write(fd, "a", 1);
+		+ 空洞文件 lseek扩展的部分是空洞
 + stat() 查看文件的属性 追踪 查看软链接的源文件
 	+ lstat 不追踪 如果是软链接 只查看软链接的文件
 	+ 比如rm就是不追踪的 vim 就是追踪的
